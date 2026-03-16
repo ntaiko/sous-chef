@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "the_deployed_cloud_run_url",
+    "secure": true,
+    "ws": true,
+    "changeOrigin": true
+  }
+}

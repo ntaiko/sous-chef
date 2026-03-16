@@ -1,0 +1,8 @@
+@if (stream()) {
+  <div class="camera">
+    <h3 class="camera-title">Camera</h3>
+    <div class="camera-video-wrapper">
+      <video [srcObject]="stream()" autoplay playsinline muted class="camera-video"></video>
+    </div>
+  </div>
+}

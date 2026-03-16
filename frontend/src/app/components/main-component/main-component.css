@@ -1,0 +1,218 @@
+.main-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  animation: sc-soft-fade-in var(--sc-duration) var(--sc-ease-out-smooth) both;
+}
+
+.main-left {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.main-left app-blob-component {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+@keyframes main-slide-in-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes main-slide-in-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.main-left-panel {
+  flex: 0 0 380px;
+  width: 380px;
+  max-height: 100vh;
+  overflow: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.97);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.06);
+  animation: main-slide-in-from-left var(--sc-duration) var(--sc-ease-out-smooth) both;
+}
+
+.main-left-panel app-stores-component {
+  display: block;
+  min-height: 0;
+  flex: 1;
+}
+
+.main-right {
+  flex: 0 0 380px;
+  width: 380px;
+  max-height: 100vh;
+  overflow: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.97);
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.06);
+  animation: main-slide-in-from-right var(--sc-duration) var(--sc-ease-out-smooth) both;
+}
+
+.main-connecting {
+  position: absolute;
+  bottom: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.main-mic {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.main-error {
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  background: rgba(120, 20, 20, 0.9);
+  color: #ffcccc;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  max-width: min(90%, 340px);
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.main-error--fade-out {
+  opacity: 0;
+}
+
+.main-saved {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 11;
+}
+
+.main-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  pointer-events: auto;
+}
+
+.main-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.main-overlay-panel {
+  position: relative;
+  width: 100%;
+  max-height: 100vh;
+  background: rgba(30, 30, 30, 0.97);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
+  overflow: auto;
+}
+
+.main-settings {
+  position: absolute;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  background-color: #cb7532c6;
+  color: #ffffff;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  transform: translateZ(0);
+  transition:
+    filter 0.2s var(--sc-ease-out-smooth),
+    transform 0.25s var(--sc-ease-out-smooth);
+}
+
+.main-settings::after {
+  background-clip: padding-box;
+  background-color: #ae5714c6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.main-settings:hover {
+  filter: brightness(1.1);
+  transform: translateZ(0) scale(1.02);
+}
+
+.main-settings:focus-visible {
+  outline: 2px solid #cb7532c6;
+  outline-offset: 2px;
+}
+
+.main-settings-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}

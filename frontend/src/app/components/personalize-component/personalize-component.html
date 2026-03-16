@@ -1,0 +1,74 @@
+<div class="personalize-container">
+  <div class="personalize-blob">
+    <app-blob-component />
+  </div>
+  <div class="personalize-form">
+    <h2 class="personalize-title">{{ mode() === 'settings' ? 'Settings' : 'Personalize' }}</h2>
+
+    <label class="field-label" for="personalize-assistant-name">Assistant name</label>
+    <input
+      id="personalize-assistant-name"
+      type="text"
+      class="field-input"
+      [value]="assistantName()"
+      (input)="assistantName.set($any($event.target).value)"
+      placeholder="e.g. Sous Chef"
+    />
+
+    <label class="field-label" for="personalize-personality">Personality</label>
+    <select
+      id="personalize-personality"
+      class="field-select"
+      [value]="personality()"
+      (change)="personality.set($any($event.target).value)"
+    >
+      <option value="friendly">Friendly</option>
+      <option value="professional">Professional</option>
+      <option value="casual">Casual</option>
+      <option value="cheerful">Cheerful</option>
+      <option value="supportive">Supportive</option>
+    </select>
+
+    <label class="field-label" for="personalize-response-type">Response type</label>
+    <select
+      id="personalize-response-type"
+      class="field-select"
+      [value]="responseType()"
+      (change)="responseType.set($any($event.target).value)"
+    >
+      <option value="concise">Concise</option>
+      <option value="detailed">Detailed</option>
+      <option value="brief">Brief</option>
+    </select>
+
+    <label class="field-label" for="personalize-language">Language (response)</label>
+    <select
+      id="personalize-language"
+      class="field-select"
+      [value]="language()"
+      (change)="language.set($any($event.target).value)"
+    >
+      @for (opt of languages; track opt.value) {
+        <option [value]="opt.value">{{ opt.label }}</option>
+      }
+    </select>
+
+    <label class="field-label" for="personalize-voice">Voice</label>
+    <select
+      id="personalize-voice"
+      class="field-select"
+      [value]="voice()"
+      (change)="voice.set($any($event.target).value)"
+    >
+      @for (opt of voices; track opt.value) {
+        <option [value]="opt.value">{{ opt.label }}</option>
+      }
+    </select>
+
+    <div class="actions">
+      <button type="button" class="btn continue-btn" (click)="continue()">
+        {{ mode() === 'settings' ? 'Save' : 'Continue' }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+@if (recipe(); as r) {
+  <div class="recipe" [class.recipe--saved]="saved()">
+    @if (saved()) {
+      <p class="recipe-saved" role="status">Recipe saved!</p>
+    }
+    <h3 class="recipe-title">{{ r.title }}</h3>
+    <section class="recipe-section">
+      <h4 class="recipe-heading">Ingredients</h4>
+      <ul class="recipe-list">
+        @for (item of r.ingredients; track item; let i = $index) {
+          <li class="recipe-item-row">
+            <label class="recipe-checkbox-wrap">
+              <input
+                type="checkbox"
+                class="recipe-checkbox"
+                [checked]="isChecked(i)"
+                (change)="onIngredientToggle(i, $any($event.target).checked)"
+                [attr.aria-label]="'Mark as added: ' + item"
+              />
+              <span class="recipe-checkbox-box" aria-hidden="true"></span>
+            </label>
+            <span class="recipe-item" [class.recipe-item-checked]="isChecked(i)">{{ stripLeadingNumber(item) }}</span>
+          </li>
+        }
+      </ul>
+    </section>
+    <section class="recipe-section">
+      <h4 class="recipe-heading">Steps</h4>
+      <ol class="recipe-steps">
+        @for (step of r.steps; track step; let i = $index) {
+          <li class="recipe-step">{{ stripLeadingNumber(step) }}</li>
+        }
+      </ol>
+    </section>
+  </div>
+}

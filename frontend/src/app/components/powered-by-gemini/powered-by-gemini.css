@@ -1,0 +1,15 @@
+.powered-by-gemini-container {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  padding: 1rem;
+}
+
+.powered-by-gemini-container a {
+  text-decoration: none;
+}
+
+.powered-by-gemini-container h3,
+.powered-by-gemini-container span {
+  color: white;
+}

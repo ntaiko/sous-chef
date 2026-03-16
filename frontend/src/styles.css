@@ -1,0 +1,246 @@
+/*
+ * Styling Variables
+ */
+
+:root {
+  --sc-web-app-main-bg-color: #ffffff;
+  --sc-web-app-main-text-color: #4d3e3e;
+  --sc-web-app-h1-font-size: 2rem;
+  --sc-web-app-h2-font-size: 1.8rem;
+  --sc-web-app-h3-font-size: 1.6rem;
+  --sc-web-app-heading-color: #4d3e3e;
+  --sc-ease-out-smooth: cubic-bezier(0.33, 1, 0.68, 1);
+  --sc-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --sc-duration: 0.45s;
+}
+
+/*
+ * End of styling variables
+ */
+
+/*
+ * Global Styles 
+ */
+
+/*
+ * Animation keyframes
+ */
+@keyframes sc-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sc-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sc-slide-in-up {
+  from {
+    transform: translateY(24px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes sc-fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sc-soft-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sc-slide-up-visible {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sc-blob-slide-to-center {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--sc-web-app-main-bg-color);
+  color: var(--sc-web-app-main-text-color);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: system-ui;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--sc-web-app-heading-color);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.btn {
+  appearance: button;
+  background-color: #cb7532c6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition:
+    filter 0.2s var(--sc-ease-out-smooth),
+    transform 0.25s var(--sc-ease-out-smooth),
+    opacity 0.25s var(--sc-ease-out-smooth);
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.btn:after {
+  background-clip: padding-box;
+  background-color: #ae5714c6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.btn,
+.btn:focus {
+  user-select: auto;
+}
+
+.btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+  transform: translateZ(0) scale(1.02);
+}
+
+.btn:disabled {
+  cursor: auto;
+}
+
+.btn:active {
+  border-width: 4px 0 0;
+  background: none;
+}
+
+.selection-container {
+  gap: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  height: 100vh;
+  opacity: 1;
+}
+
+.selection-container .selection {
+  animation: sc-slide-in-up var(--sc-duration) var(--sc-ease-out-smooth) both;
+  transition:
+    transform 0.6s var(--sc-ease-out-smooth),
+    box-shadow 0.6s var(--sc-ease-out-smooth),
+    background-color 0.6s var(--sc-ease-out-smooth);
+}
+
+.selection-container .selection:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.selection-container .selection:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.selection-container .selection:nth-child(3) {
+  animation-delay: 0.19s;
+}
+
+.selection-container .selection:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(203, 117, 50, 0.25);
+}
+
+.selection {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cb7532c6;
+  border-radius: 1rem;
+  font-size: 2.2rem;
+  cursor: pointer;
+}
+
+/*
+ * End of Global Styles
+ */

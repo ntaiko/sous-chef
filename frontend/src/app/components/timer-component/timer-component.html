@@ -1,0 +1,16 @@
+@if (timers().length > 0) {
+  <div class="timers-container">
+    @for (t of timers(); track t.id) {
+      <div class="timer" [class.timer--ended]="t.status === 'ended'">
+        @if (t.status === 'ended') {
+          <span class="timer-label">{{ t.title }}: Time's up!</span>
+        } @else {
+          <span class="timer-label">
+            {{ t.title }}{{ t.status === 'paused' ? ' (paused)' : '' }}
+          </span>
+          <span class="timer-value">{{ formatSeconds(t.remainingSeconds) }}</span>
+        }
+      </div>
+    }
+  </div>
+}

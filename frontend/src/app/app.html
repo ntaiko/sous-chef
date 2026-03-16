@@ -1,0 +1,33 @@
+@if (step() === 'intro-component') {
+  <div class="step-view">
+    <app-intro-component (start)="personalize()" />
+    <app-powered-by-gemini />
+  </div>
+} @else if (step() === 'personalize-component') {
+  <div class="step-view">
+    <app-personalize-component
+      [mode]="personalizeMode()"
+      [initialAssistantName]="name()"
+      [initialPersonality]="personality()"
+      [initialResponseType]="responseType()"
+      [initialLanguage]="language()"
+      [initialVoice]="voice()"
+      (start)="onPersonalizeSubmit($event)"
+    />
+  </div>
+} @else if (step() === 'welcome-message-component') {
+  <div class="step-view">
+    <app-welcome-messsage-component [name]="name()" (continueToSelection)="goToMain()" />
+  </div>
+} @else if (step() === 'main-component') {
+  <div class="step-view">
+    <app-main-component
+      [assistantName]="name()"
+      [personality]="personality()"
+      [responseType]="responseType()"
+      [language]="language()"
+      [voice]="voice()"
+      (openSettings)="openSettings()"
+    />
+  </div>
+}

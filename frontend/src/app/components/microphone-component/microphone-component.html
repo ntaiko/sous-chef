@@ -1,0 +1,60 @@
+<div
+  class="mic-wrap"
+  [class.mic-listening]="state() === 'listening'"
+  [class.mic-denied]="state() === 'denied'"
+  [class.mic-error]="state() === 'error'"
+>
+  <button
+    type="button"
+    class="mic-btn"
+    [class.mic-btn--listening]="state() === 'listening'"
+    [class.mic-btn--requesting]="state() === 'requesting'"
+    [class.mic-btn--disabled]="state() === 'requesting' || state() === 'denied'"
+    [attr.aria-label]="statusLabel"
+    [attr.aria-pressed]="state() === 'listening'"
+    [disabled]="state() === 'requesting'"
+    (click)="toggle()"
+  >
+    <span class="mic-btn-icon" aria-hidden="true">
+      @if (state() === 'listening') {
+        <svg
+          class="mic-icon mic-icon-on"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z" />
+          <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 19v4M8 23h8" />
+        </svg>
+      } @else {
+        <svg
+          class="mic-icon mic-icon-off"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z" />
+          <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 19v4M8 23h8" />
+        </svg>
+      }
+    </span>
+    @if (state() === 'requesting') {
+      <span class="mic-btn-spinner" aria-hidden="true"></span>
+    }
+  </button>
+
+  @if (state() === 'listening') {
+    <div class="mic-level" role="presentation">
+      <div class="mic-level-bar" [style.height.%]="level()"></div>
+    </div>
+  }
+
+  <p
+    class="mic-status"
+    [attr.aria-live]="state() === 'denied' || state() === 'error' ? 'polite' : null"
+  >
+    {{ statusLabel }}
+  </p>
+</div>

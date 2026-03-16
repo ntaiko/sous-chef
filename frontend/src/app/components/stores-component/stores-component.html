@@ -1,0 +1,47 @@
+@if (places().length > 0) {
+  <div class="stores">
+    <h3 class="stores-title">{{ label() }}</h3>
+    <ul class="stores-list">
+      @for (place of places(); track place.name + place.formattedAddress) {
+        <li class="stores-item">
+          @if (place.photoName) {
+            <img
+              [src]="placePhotoUrl(place.photoName)"
+              alt=""
+              class="stores-photo"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+            />
+          }
+          <div class="stores-item-content">
+            <span class="stores-name">{{ place.name }}</span>
+            <span class="stores-address">{{ place.formattedAddress }}</span>
+            @if (place.rating != null) {
+              <span class="stores-rating" aria-label="Rating">{{ place.rating }} ★</span>
+            }
+            <div class="stores-links">
+              @if (place.websiteUri) {
+                <a
+                  [href]="place.websiteUri"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="stores-link"
+                  >Website</a
+                >
+              }
+              @if (place.googleMapsUri) {
+                <a
+                  [href]="place.googleMapsUri"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="stores-link stores-link-maps"
+                  >Google Maps</a
+                >
+              }
+            </div>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+}

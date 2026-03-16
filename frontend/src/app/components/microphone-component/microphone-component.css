@@ -1,0 +1,153 @@
+.mic-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mic-assistant-name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--sc-web-app-main-text-color, #4d3e3e);
+  text-align: center;
+}
+
+.mic-btn {
+  --mic-size: 64px;
+  position: relative;
+  width: var(--mic-size);
+  height: var(--mic-size);
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  background-color: #cb7532c6;
+  color: #ffffff;
+  cursor: pointer;
+  box-sizing: border-box;
+  overflow: visible;
+  transform: translateZ(0);
+  transition:
+    filter 0.2s var(--sc-ease-out-smooth),
+    transform 0.25s var(--sc-ease-out-smooth);
+}
+
+.mic-btn::after {
+  background-clip: padding-box;
+  background-color: #ae5714c6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.mic-btn:hover:not(.mic-btn-disabled):not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateZ(0) scale(1.02);
+}
+
+.mic-btn:focus-visible {
+  outline: 2px solid #cb7532c6;
+  outline-offset: 3px;
+}
+
+.mic-btn-listening {
+  background-color: #ae5714c6;
+  color: #fff;
+}
+
+.mic-btn-listening::after {
+  background-color: #8e4610c6;
+}
+
+.mic-btn-listening:hover:not(.mic-btn--disabled):not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateZ(0) scale(1.02);
+}
+
+.mic-btn-disabled,
+.mic-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+.mic-btn-requesting .mic-btn-icon {
+  opacity: 0.35;
+}
+
+.mic-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mic-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.mic-icon-on {
+  animation: mic-pulse 1.2s var(--sc-ease-in-out) infinite;
+}
+
+@keyframes mic-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.mic-btn-spinner {
+  position: absolute;
+  inset: 0;
+  border: 3px solid rgba(77, 62, 62, 0.15);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: mic-spin 0.7s linear infinite;
+}
+
+@keyframes mic-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mic-level {
+  width: 6px;
+  height: 48px;
+  background: rgba(77, 62, 62, 0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.mic-level-bar {
+  width: 100%;
+  min-height: 4px;
+  background: #cb7532c6;
+  border-radius: 2px;
+  transition: height 0.08s ease-out;
+}
+
+.mic-status {
+  font-size: 0.875rem;
+  color: var(--sc-web-app-main-text-color, #4d3e3e);
+  margin: 0;
+  text-align: center;
+  max-width: 180px;
+}
+
+.mic-denied .mic-status,
+.mic-error .mic-status {
+  color: #b33;
+}

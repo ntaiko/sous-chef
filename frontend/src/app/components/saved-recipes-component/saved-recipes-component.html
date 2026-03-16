@@ -1,0 +1,76 @@
+<div class="saved">
+  <div class="search-container">
+    <h2 class="saved-title">Saved recipes</h2>
+    @if (recipes().length !== 0) {
+      <input
+        type="text"
+        placeholder="Search for saved recipes..."
+        class="search-input"
+        [value]="searchQuery()"
+        (input)="searchQuery.set($any($event.target).value)"
+        aria-label="Search saved recipes"
+      />
+    }
+  </div>
+  @if (recipes().length === 0) {
+    <div class="saved-empty-container">
+      <p class="saved-empty">
+        No saved recipes yet. Say "save it" when viewing a recipe to add it here.
+      </p>
+    </div>
+  } @else {
+    @if (filteredRecipes().length === 0) {
+      <p class="saved-empty">No recipes match your search.</p>
+    } @else {
+      <ul class="saved-list">
+        @for (recipe of filteredRecipes(); track recipe.title) {
+          <li class="saved-item">
+            <button
+              type="button"
+              class="saved-head"
+              (click)="toggleExpand(recipe.title)"
+              [attr.aria-expanded]="isExpanded(recipe)"
+            >
+              <span class="saved-name">{{ recipe.title }}</span>
+              <span class="saved-chevron" aria-hidden="true">{{
+                isExpanded(recipe) ? '↓' : '→'
+              }}</span>
+            </button>
+            @if (isExpanded(recipe)) {
+              <div class="saved-body">
+                <h4 class="saved-heading">Ingredients</h4>
+                <ul class="saved-ingredients">
+                  @for (ing of recipe.ingredients; track ing) {
+                    <li>{{ stripLeadingNumber(ing) }}</li>
+                  }
+                </ul>
+                <h4 class="saved-heading">Steps</h4>
+                <ol class="saved-steps">
+                  @for (step of recipe.steps; track step; let i = $index) {
+                    <li>{{ stripLeadingNumber(step) }}</li>
+                  }
+                </ol>
+                <div class="saved-actions">
+                  <button
+                    type="button"
+                    class="saved-btn saved-btn-show btn"
+                    (click)="showInMain(recipe, $event)"
+                  >
+                    Show in main
+                  </button>
+                  <button
+                    type="button"
+                    class="saved-btn saved-btn-remove btn"
+                    (click)="remove(recipe, $event)"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            }
+          </li>
+        }
+      </ul>
+    }
+  }
+</div>

@@ -1,0 +1,81 @@
+<div class="main-container">
+  @if (storesList().length > 0) {
+    <aside class="main-left-panel" aria-label="Stores near you">
+      <app-stores-component [places]="storesList()" label="Stores near you" />
+    </aside>
+  }
+  <div class="main-left">
+    <app-blob-component [level]="agentLevel()" />
+    @if (agentLive.isConnecting()) {
+      <p class="main-connecting">Connecting…</p>
+    }
+    <div class="main-mic">
+      <app-microphone-component
+        [assistantName]="assistantName()"
+        (streamReady)="onMicStreamReady($event)"
+        (streamEnded)="onMicStreamEnded()"
+      />
+    </div>
+    <app-timer-component [timers]="timers()" />
+    <app-camera-component [stream]="cameraStream()" />
+    @if (agentError()) {
+      <p
+        class="main-error"
+        [class.main-error--fade-out]="errorDismissing()"
+        role="alert"
+      >{{ agentError() }}</p>
+    }
+    @if (liveConnected()) {
+      <button
+        type="button"
+        class="main-saved btn"
+        aria-label="Saved recipes"
+        (click)="toggleSavedPanel()"
+      >
+        Saved
+      </button>
+    }
+    <button
+      type="button"
+      class="main-settings"
+      aria-label="Open settings"
+      (click)="openSettings.emit()"
+    >
+      <svg
+        class="main-settings-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="3" />
+        <path
+          d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+        />
+      </svg>
+    </button>
+  </div>
+  @if (showSavedPanel()) {
+    <div class="main-overlay" role="dialog" aria-label="Saved recipes">
+      <div class="main-overlay-backdrop" (click)="showSavedPanel.set(false)"></div>
+      <div class="main-overlay-panel">
+        <app-saved-recipes-component
+          [recipes]="savedRecipes()"
+          (recipeRemoved)="onRecipeRemoved($event)"
+          (recipeSelected)="onRecipeSelected($event)"
+        />
+      </div>
+    </div>
+  }
+  @if (currentRecipe()) {
+    <aside class="main-right">
+      <app-recipe-component
+        [recipe]="currentRecipe()"
+        [checkedIndices]="ingredientChecked()"
+        (ingredientCheckedChange)="onIngredientCheckedChange($event)"
+        [saved]="recipeSaved()"
+      />
+    </aside>
+  }
+</div>

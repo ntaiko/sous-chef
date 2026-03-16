@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Step views: each step slides in when it becomes active */
+.step-view {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: sc-slide-up-visible var(--sc-duration) var(--sc-ease-out-smooth) both;
+}
