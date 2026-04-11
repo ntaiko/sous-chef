@@ -1,7 +1,5 @@
 # Sous Chef
 
-![Sous Chef all tools working](sous-chef-useful-images/sous-chef-all-tools-working.png)
-
 Voice-first cooking assistant powered by the **Gemini Live API**. Talk to it naturally—get recipes, set timers, find nearby stores, manage ingredients—with real-time audio and optional camera. Built for the [Gemini Live Agent Challenge](https://geminiliveagentchallenge.devpost.com/).
 
 ## What it does
